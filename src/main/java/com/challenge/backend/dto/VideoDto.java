@@ -12,6 +12,7 @@ public class VideoDto {
 	private String url;
 		
 	public VideoDto(Video video) {
+		this.id = video.getId();
 		this.titulo = video.getTitulo();
 		this.descricao = video.getDescricao();
 		this.url = video.getUrl();
