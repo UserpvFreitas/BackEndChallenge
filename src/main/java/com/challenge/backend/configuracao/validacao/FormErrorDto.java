@@ -1,18 +1,18 @@
 package com.challenge.backend.configuracao.validacao;
 
-public class ErroDeFormularioDto {
-	private String campo;
-	private String mensagem;
+public class FormErrorDto {
+	private String field;
+	private String message;
 	
-	public ErroDeFormularioDto(String campo, String mensagem) {
-		this.campo = campo;
-		this.mensagem = mensagem;
+	public FormErrorDto(String field, String message) {
+		this.field = field;
+		this.message = message;
 	}
-	public String getCampo() {
-		return campo;
+	public String getField() {
+		return field;
 	}
-	public String getMensagem() {
-		return mensagem;
+	public String getMessage() {
+		return message;
 	}
 	
 	

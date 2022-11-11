@@ -34,13 +34,13 @@ public class VideoController{
 	private VideoRepository videoRepository;
 	
 	@GetMapping
-	public List<VideoDto> lista(){
+	public List<VideoDto> list(){
 		List<Video> video = videoRepository.findAll();
-		return VideoDto.converter(video);
+		return VideoDto.convert(video);
 	}	
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<VideoDto> detalhe(@PathVariable Long  id) {
+	public ResponseEntity<VideoDto> detail(@PathVariable Long  id) {
 		Optional<Video> video = videoRepository.findById(id);
 		
 		if(video.isPresent()) {
@@ -51,11 +51,11 @@ public class VideoController{
 	
 	@PostMapping
 	@Transactional
-	public ResponseEntity<VideoDto> cadastrar(
+	public ResponseEntity<VideoDto> create(
 		@RequestBody @Valid VideoForm form,
 		UriComponentsBuilder uriBuilder
 	){
-		Video video = form.converter();
+		Video video = form.convert();
 		videoRepository.save(video);
 		
 		URI uri = uriBuilder.path("/videos/{id}").buildAndExpand(video.getId()).toUri();
@@ -64,7 +64,7 @@ public class VideoController{
 	
 	@PutMapping("/{id}")
 	@Transactional
-	public ResponseEntity<VideoDto> atualizar(@PathVariable Long id, @RequestBody @Valid UpdateVideoForm form){
+	public ResponseEntity<VideoDto> update(@PathVariable Long id, @RequestBody @Valid UpdateVideoForm form){
 		Optional<Video> optional = videoRepository.findById(id);
 		
 		if(optional.isPresent()) {
@@ -77,16 +77,14 @@ public class VideoController{
 	
 	@DeleteMapping("/{id}")
 	@Transactional
-	public ResponseEntity<?> deletar(@PathVariable Long id){
+	public ResponseEntity<?> delete(@PathVariable Long id){
 		Optional<Video> optional = videoRepository.findById(id);
 		
-		if(optional.isPresent()) {
+		if(optional.isPresent()) {			
 			videoRepository.deleteById(id);
 			return ResponseEntity.ok().build(); 
 		}
 		
-		return ResponseEntity.notFound().build();
-		
-		
+		return ResponseEntity.notFound().build();		
 	}
 }

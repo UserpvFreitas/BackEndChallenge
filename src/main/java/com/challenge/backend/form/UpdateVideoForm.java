@@ -16,6 +16,8 @@ public class UpdateVideoForm {
 	private String descricao;
 	@NotNull @NotEmpty @Length(min = 5)
 	private String url;
+	
+	private Long category;
 
 	
 	
@@ -23,42 +25,38 @@ public class UpdateVideoForm {
 		return titulo;
 	}
 
-
-
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
 	}
-
-
 
 	public String getDescricao() {
 		return descricao;
 	}
 
-
-
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-
-
 
 	public String getUrl() {
 		return url;
 	}
 
-
-
 	public void setUrl(String url) {
 		this.url = url;
 	}
 
+	public Long getCategory() {
+		return category;
+	}
 
+	public void setCategory(Long category) {
+		this.category = category == null ? 1 : category;
+	}
 
 	public Video atualizar(Long id, VideoRepository videoRepository) {
 		Video video = videoRepository.getReferenceById(id);
-		video.setTitulo(this.titulo);
-		video.setDescricao(this.descricao);
+		video.setTitle(this.titulo);
+		video.setDescription(this.descricao);
 		video.setUrl(this.url);
 		
 		return video;
